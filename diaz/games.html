@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Games streamed by Diaz</title>
+		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
+		<link href="/assets/style.css" rel="stylesheet">
+		<script src="/assets/code.js"></script>
+		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+	</head>
+
+	<body>
+		<div class="footer-spacer">
+			<div class="content">
+				<div class="frame">
+					<div class="header">
+						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
+						<h1><a href="/diaz/">Streamed games</a></h1>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>
+					</div>
+	
+					<div class="block">
+						<h2>Game lists</h2>
+						<p>Here's a classification of the games that Diaz has played on stream. We have lists for <a href="#active">active</a>, <a href="#completed">completed</a>, <a href="#inactive">inactive</a>, <a href="#played">played</a> and <a href="#dropped">dropped</a> games.</p>
+						<div class="quote">
+							<p>Last updated: 8 November 2024</p>
+						</div>
+						<!-- <p><span class="subtler">(having a simple tracking doc and dynamic data viz (like a vertical gantt/timeline chart) to display selected records would be awesome. kinda painful to create, but maybe actually easier to maintain in some regards)</span></p> -->
+						<!-- e.g. sliders for play frequency (jump king probably being lowest in terms of sessions/stream within the period), same for natural days, search time range, min/max time range since played, num sessions range, complete/incomplete, etc. -->
+						
+						<h3 id="active">Active</h3>
+						<p>Games that Diaz has been playing recently on stream.</p>
+						<ul>
+							<li>Outer Wilds <span class="subtler">(adventure/mystery, 1 stream)</span></li>
+							<li>Helltaker <span class="subtler">(puzzle/dating-sim, 1 stream)</span></li>
+							<li>The Outlast Trials <span class="subtler">(survival horror, 2 streams with Kappa carrying and Tengu)</span></li>
+							<li>Cult of the Lamb <span class="subtler">(roguelike, 2 streams with Tengu)</span></li>
+							<li>Hollow Knight <span class="subtler">(metroidvania, +40 streams, some endings reached)</span></li>
+							<li>Vampire: The Masquerade - Bloodlines <span class="subtler">(action RPG, 1 stream)</span></li>
+							<li>At Dead Of Night <span class="subtler">(interactive horror, 2 streams)</span></li>
+							<li>Persona 5 Royal <span class="subtler">(RPG, +10 streams)</span></li>
+							<li>Fortnite <span class="subtler">(battle royale, +10 streams)</span></li>
+							<li>Jump King <span class="subtler">(platformer, +10 streams [members-only])</span></li>
+							<li>Minecraft <span class="subtler">(sandbox, 3 streams with Kappa/minions)</span></li>
+							<li>Guild Wars 2 <span class="subtler">(MMORPG, 3 streams with minions)</span></li>
+							<li>Hades <span class="subtler">(action roguelike, 11 streams)</span></li>
+							<li>Psychonauts <span class="subtler">(action-adventure, 4 streams)</span></li>
+							<li>Warhammer 40,000: Space Marine 2 <span class="subtler">(action shooter, 3 streams with Tengu and Kappa)</span></li>
+							<li>Alien: Isolation <span class="subtler">(horror, 2 streams watching <strong>Kappa</strong>)</span></li>
+						</ul>
+						
+						<h3 id="completed">Completed</h3>
+						<p>Games with a clear ending that Diaz has reached.</p>
+						<ul>
+							<li>Hollow Knight <span class="subtler">(...still playing for more endings)</span></li>
+							<li>Doki Doki Literature Club Plus! <span class="subtler">(visual novel, 9 streams. DLC pending)</span></li>
+							<li>Kindergarten 2 <span class="subtler">(adventure/comedy, 4 streams)</span></li>
+							<li>Kindergarten <span class="subtler">(adventure/comedy, 3 streams)</span></li>
+							<li>Hotline Miami <span class="subtler">(top-down shooter, 4 streams)</span></li>
+							<li>Half-Life <span class="subtler">(FPS, 12 streams)</span></li>
+							<li>Ib <span class="subtler">(adventure horror, 4 streams)</span></li>
+							<li>Resident Evil 4 <span class="subtler">(survival-horror shooter, 15 streams)</span></li>
+							<li>Resident Evil 4: Separate Ways <span class="subtler">(survival-horror shooter, 5 streams)</span></li>
+							<li>To the Moon <span class="subtler">(story-driven, 5 streams)</span></li>
+							<li>Little Nightmares + DLC <span class="subtler">(pluzzle-platform/horror, 4 streams)</span></li>
+							<li>Catherine <span class="subtler">(puzzle, 9 streams)</span></li>
+							<li>Unsolved Case / Unboxing Cryptic Killer <span class="subtler">(puzzle, with BubblyBunny, 2 streams)</span></li>
+							<li>There Is No Game <span class="subtler">(point & click, 2 streams)</span></li>
+							<li>Home Sweet Home <span class="subtler">(horror, 5 streams)</span></li>
+							<li>The Wolf Among Us <span class="subtler">(mystery, 2 streams)</span></li>
+							<li>The Quarry <span class="subtler">(cinematic horror, 3 streams)</span></li>
+							<li>Stray <span class="subtler">(aventure, 1 very long stream)</span></li>
+							<li>Parasocial <span class="subtler">(horror, 1 stream)</span></li>
+							<li>Hospital 666 <span class="subtler">(spot the difference/horror, 2 streams with BubblyBunny and Kappa)</span></li>
+							<li>P.T. <span class="subtler">(horror teaser for Silent Hills, 1 stream)</span></li>
+							<li>Dollmare <span class="subtler">(simulation, 1 stream)</span></li>
+							<li>Welcome to Kowloon <span class="subtler">(spooky walking simulator, 1 stream)</span></li>
+							<li>Layers of Fear <span class="subtler">(horror, 2 streams)</span></li>
+							<li>Don't Scream <span class="subtler">(horror, 1 streams)</span></li>
+							<li>Crimson Snow <span class="subtler">(christmas horror, 1 stream)</span></li>
+							<li>Detention <span class="subtler">(horror/adventure, 1 stream)</span></li>
+							<li>Amanda the Adventurer <span class="subtler">(puzzle/horror, 2 streams)</span></li>
+							<li>Devotion <span class="subtler">(horror, 1 stream)</span></li>
+							<li>Visage <span class="subtler">(horror, 7 streams)</span></li>
+							<li>Outlast <span class="subtler">(action/horror, 2 streams watching <strong>Kappa</strong>)</span></li>
+							<li>Outlast: Whistleblower <span class="subtler">(action/horror, 2 streams watching <strong>Kappa</strong>)</span></li>
+						</ul>
+						
+						<h3 id="inactive">Inactive</h3>
+						<p>Games that Diaz has played and she might want to get back to, despite not having touched for a while.</p>
+						<ul>
+							<li>SENRAN KAGURA Burst Re:Newal <span class="subtler">(beat 'em up/ecchi, 3 streams)</span></li>
+							<li>KeyWe <span class="subtler">(co-op puzzle, 2 streams with Kappa)</span></li>
+							<li>Half-Life 2 <span class="subtler">(FPS, 2 streams)</span></li>
+							<li>It Takes Two <span class="subtler">(co-op adventure, 2 streams with Kappa)</span></li>
+							<li>Beyond Two Souls <span class="subtler">(story-driven action/adventure, 1 stream)</span></li>
+							<li>Story of Seasons: A wonderful Life <span class="subtler">(life sim/farming, 4 streams)</span></li>
+							<li>Phoenix Wright: Ace Attorney <span class="subtler">(visual novel/adventure, 3 streams with Tengu and Kappa)</span></li>
+							<li>Portal 2 <span class="subtler">(puzzle-platform, 1 stream with Tengu)</span></li>
+						</ul>
+						
+						<h3 id="played">Played</h3>
+						<p>Open-ended, endless or arcade games that Diaz has played and isn't actively planning to return to. They are vaguely ordered from highest to lowest likelihood of Diaz playing them again on stream for some random reason.</p>
+						<ul>
+							<li>Fall Guys <span class="subtler">(platform battle royale, 4 streams with minions)</span></li>
+							<li>Dead by Daylight <span class="subtler">(survival horror, 2 streams with BubblyBunny/minions)</span></li>
+							<li>Muse Dash <span class="subtler">(rhythm game, 3 streams)</span></li>
+							<li>Phasmophobia <span class="subtler">(multiplayer survival horror, 3 streams, collabs)</span></li>
+							<li>Left 4 Dead 2 <span class="subtler">(FPS/survival horror, 2 streams with Murmaider/minions)</span></li>
+							<li>Bubble Trouble <span class="subtler">(arcade, 1 stream)</span></li>
+							<li>Scribble it! <span class="subtler">(drawing, 1 stream with BubblyBunny, Kappa and Tengu)</span></li>
+							<li>Identity V <span class="subtler">(1 stream, F2P survival horror)</span></li>
+							<li>Overwatch 2<span class="subtler">(battle royale, 2 streams with OkAs)</span></li>
+							<li>Guess who? <span class="subtler">(guessing, 1 stream with BubblyBunny)</span></li>
+						</ul>
+						
+						<h3 id="dropped">Dropped</h3>
+						<p>Games that Diaz has forgotten about, pretended to forget about or doesn't want to touch anymore. Vaguely sorted from lower to higher levels of hate and trauma.</p>
+						<ul>
+							<li>Baldur's Gate 3 <span class="subtler">(RPG, 1 stream)</span></li>
+							<li>Home Sweet Home EP2 <span class="subtler">(horror, 0.2 streams)</span></li>
+							<li>Devour <span class="subtler">(co-op horror survival, 2 streams with BubblyBunny)</span></li>
+							<li>League of Legends <span class="subtler">(MOBA, 3 streams)</span></li>
+							<li>World of Warcraft Classic <span class="subtler">(MMORPG, 2 streams)</span></li>
+							<li>Hogwarts Legacy <span class="subtler">(action RPG, 4 streams)</span></li>
+							<li>Palworld <span class="subtler">(survival/monster-taming, 1 stream)</span></li>
+							<li>Chained Together <span class="subtler">(platformer, 1 stream with BubblyBunny)</span></li>
+							<li>Elden Ring <span class="subtler">(souls-like, 2 streams)</span></li>
+							<li>Friday Night Funkin' <span class="subtler">(rhythm game, 1 stream)</span></li>
+							<li>South Park: Snow Day! <span class="subtler">(adventure, 1 stream)</span></li>
+							<li>Observer: System Redux <span class="subtler">(mystery/horror, 1 stream with Kappa)</span></li>
+							<li>The secret of Monkey Island <span class="subtler">(point & click, 4 streams)</span></li>
+							<li>Bully <span class="subtler">(action-adventure, 5 streams)</span></li>
+							<li>Cozy Grove <span class="subtler">(casual, 0.2 streams)</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<a href="/about"><svg><use href="/assets/icons.svg#bolt"/></svg> about this website <svg><use href="/assets/icons.svg#bolt"/></svg></a>
+			</footer>
+		</div>
+	</body>
+</html>

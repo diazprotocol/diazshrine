@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Unofficial Diaz art</title>
+		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
+		<link href="/assets/style.css" rel="stylesheet">
+		<script src="/assets/code.js"></script>
+		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+	</head>
+
+	<body>
+		<!-- this div is for overlays, managed through js, ignore -->
+		<div>
+			<!-- dual mode (image + info) -->
+			<div class="imgview hidden" id="imgview-dual">
+				<div class="dual">
+					<div style="position: relative;">
+						<img src="" class="dual-image" id="imgview-image-dual">
+						<div class="img-buttons float-buttons">
+							<button aria-label="previous image" onclick="galleryPrevImage();"><svg viewBox="0 -960 960 960"><path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z"/></svg></button>
+							<button aria-label="back to gallery" onclick="backToGallery();"><svg viewBox="0 -960 960 960"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+							<button aria-label="image close-up mode" onclick="galleryToCloseUpMode();"><svg viewBox="0 -960 960 960"><path d="M822-26 686-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800l80 80h-80v480h446l-80-80H240v-80h206L26-822l56-56L878-82l-56 56Zm48-178-70-70v-446H354l-80-80h526q33 0 56.5 23.5T880-720v476q0 11-2 21t-8 19ZM594-480l-80-80h206v80H594Zm-354 0v-80h80v80h-80Zm337-17Zm-194 34Z"/></svg></button>
+							<button aria-label="next image" onclick="galleryNextImage();"><svg viewBox="0 -960 960 960"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg></button>
+						</div>
+					</div>
+					<div style="margin: 8px;"></div> <!-- separator/gap -->
+					<dl class="dual-info" id="imgview-dl-dual"></dl>
+				</div>
+			</div>
+
+			<!-- close up mode (only image) -->
+			<div class="imgview hidden" id="imgview-close-up">
+				<div class="gallery-vert-centered fullsize" id="close-up-fullsize">
+					<img src="" class="img-close-up" id="imgview-image-close-up">
+					<div class="img-buttons">
+						<button aria-label="previous image" onclick="galleryPrevImage();"><svg viewBox="0 -960 960 960"><path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z"/></svg></button>
+						<button aria-label="back to gallery" onclick="backToGallery();"><svg viewBox="0 -960 960 960"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+						<button aria-label="show information" onclick="galleryLeaveCloseUpMode();"><svg viewBox="0 -960 960 960"><path d="M240-320h320v-80H240v80Zm400 0h80v-80h-80v80ZM240-480h80v-80h-80v80Zm160 0h320v-80H400v80ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/></svg></button>
+						<button aria-label="next image" onclick="galleryNextImage();"><svg viewBox="0 -960 960 960"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- info mode (only image details) -->
+			<div class="imgview hidden" id="imgview-details">
+				<div class="gallery-vert-centered">
+					<div class="gallery-vert-centered" style="position: relative;">
+						<div class="img-background"><img src="" class="img-details" id="imgview-image-details"></div>
+						<dl class="details-info" id="imgview-dl-details"></dl>
+					</div>
+					<div class="img-buttons">
+						<button aria-label="previous image" onclick="galleryPrevImage();"><svg viewBox="0 -960 960 960"><path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z"/></svg></button>
+						<button aria-label="back to gallery" onclick="backToGallery();"><svg viewBox="0 -960 960 960"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+						<button aria-label="leave details mode" onclick="galleryLeaveDetailsMode();"><svg viewBox="0 -960 960 960"><path d="M822-26 686-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800l80 80h-80v480h446l-80-80H240v-80h206L26-822l56-56L878-82l-56 56Zm48-178-70-70v-446H354l-80-80h526q33 0 56.5 23.5T880-720v476q0 11-2 21t-8 19ZM594-480l-80-80h206v80H594Zm-354 0v-80h80v80h-80Zm337-17Zm-194 34Z"/></svg></button>
+						<button aria-label="next image" onclick="galleryNextImage();"><svg viewBox="0 -960 960 960"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- main content -->
+		<div class="footer-spacer">
+			<div class="content">
+				<div class="frame">
+					<div class="header">
+						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
+						<h1><a href="/art/">Fan and unofficial art</a></h1>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>
+					</div>
+				</div>
+
+				<div class="gallery" id="gallery">
+					<div>
+						<a href="#radio-doki"><img loading="lazy" data-ffmt="jpg" id="#radio-doki-source" src="/assets/art/unofficial/mini/radio_doki.webp" alt="Missing"></a>
+						<a href="#anon"><img loading="lazy" id="#anon-source" src="/assets/art/unofficial/anon.png" alt="Missing"></a>
+						<a href="#hein-tongue"><img loading="lazy" id="#hein-tongue-source" src="/assets/art/unofficial/mini/hein_tongue.webp" alt="Missing"></a>
+						<a href="#diaz-expressions"><img loading="lazy" id="#diaz-expressions-source" src="/assets/art/unofficial/mini/diaz_expressions.webp" alt="Missing"></a>
+						<a href="#hein-drunk"><img loading="lazy" data-ffmt="jpg" id="#hein-drunk-source" src="/assets/art/unofficial/mini/hein_drunk.webp" alt="Missing"></a>
+					</div>
+
+					<div>
+						<a href="#hein-mad"><img loading="lazy" id="#hein-mad-source" src="/assets/art/unofficial/mini/hein_mad.webp" alt="Missing"></a>
+						<a href="#hein-punk"><img loading="lazy" data-ffmt="jpeg" id="#hein-punk-source" src="/assets/art/unofficial/mini/hein_punk.webp" alt="Missing"></a>
+						<a href="#screen-solar-hug"><img loading="lazy" id="#screen-solar-hug-source" src="/assets/art/unofficial/mini/screen_solar_hug.webp" alt="Missing"></a>
+						<a href="#tinne"><img loading="lazy" id="#tinne-source" src="/assets/art/unofficial/tinne.gif" alt="Missing"></a>
+					</div>
+					
+					<div>
+						<a href="#hein-slime"><img loading="lazy" id="#hein-slime-source" src="/assets/art/unofficial/mini/hein_slime.webp" alt="Missing"></a>
+						<a href="#charon"><img loading="lazy" id="#charon-source" src="/assets/art/unofficial/mini/charon.webp" alt="Missing"></a>
+						<a href="#hein-blue"><img loading="lazy" id="#hein-blue-source" src="/assets/art/unofficial/mini/hein_blue.webp" alt="Missing"></a>
+						<a href="#kappa-bean"><img loading="lazy" id="#kappa-bean-source" src="/assets/art/unofficial/mini/kappa_bean.webp" alt="Missing"></a>
+						<a href="#hein-bricc"><img loading="lazy" data-ffmt="png" id="#hein-bricc-source" src="/assets/art/unofficial/mini/hein_bricc.webp" alt="Missing"></a>
+					</div>
+
+					<div>
+						<a href="#kappa-jazz"><img loading="lazy" id="#kappa-jazz-source" src="/assets/art/unofficial/mini/kappa_jazz.webp" alt="Missing"></a>
+						<a href="#radio-ice-cream"><img loading="lazy" data-ffmt="jpg" id="#radio-ice-cream-source" src="/assets/art/unofficial/mini/radio_ice_cream.webp" alt="Missing"></a>
+						<a href="#hein-choice"><img loading="lazy" id="#hein-choice-source" src="/assets/art/unofficial/mini/hein_choice.webp" alt="Missing"></a>
+						<a href="#radio-psydiaz"><img loading="lazy" id="#radio-psydiaz-source" src="/assets/art/unofficial/mini/radio_psydiaz.webp" alt="Missing"></a>
+						<a href="#kappa-marine"><img loading="lazy" id="#kappa-marine-source" src="/assets/art/unofficial/mini/kappa_marine.webp" alt="Missing"></a>
+					</div>
+				</div>
+
+				<div class="hidden"> <!-- image details -->
+					<dl id="#radio-doki-details">
+						<dt><strong>Attached poem</strong></dt>
+						<dd>Tall in the skies like Mnemosyne stands.<br>Embracing her twin, love at first glance.<br>The voice is the same<br>The heart is to blame<br>But blessed are the minions that ship them as friends.</dd>
+		
+						<dt><strong>Artist</strong></dt>
+						<dd>Radio</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>25 February 2024</dd>
+					</dl>
+
+					<dl id="#radio-psydiaz-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/miidomidori">@miidomidori</a> (みどり | Midori)</dd>
+
+						<dt><strong>Commissioned by</strong></dt>
+						<dd>Radio</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>25 February 2024</dd>
+					</dl>
+
+					<dl id="#hein-blue-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>27 December 2023</dd>
+					</dl>
+
+					<dl id="#charon-details">
+						<dt><strong>Artist</strong></dt>
+						<dd>Charon</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>31 December 2023</dd>
+					</dl>
+
+					<dl id="#hein-bricc-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>26 March 2024</dd>
+					</dl>
+
+					<dl id="#hein-slime-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>18 July 2024</dd>
+					</dl>
+
+					<dl id="#screen-solar-hug-details">
+						<dt><strong>Artist</strong></dt>
+						<dd>Screen Solar</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>19 January 2024</dd>
+					</dl>
+
+					<dl id="#hein-choice-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>2 February 2024</dd>
+					</dl>
+
+					<dl id="#anon-details">
+						<dt><strong>Artist</strong></dt>
+						<dd>Anonymous</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>28 June 2024</dd>
+					</dl>
+
+					<dl id="#hein-mad-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>25 December 2023</dd>
+					</dl>
+					
+					<dl id="#kappa-jazz-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Diaz bullying <a href="https://www.twitch.tv/bubblybunnyvt">Bunny</a> as usual.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.youtube.com/@KappaKuro">Kappa</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>2 May 2024</dd>
+					</dl>
+
+					<dl id="#radio-ice-cream-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Commission from Radio as a gift for Diaz's birthday, depicting the "ice cream incident".</dd>
+		
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/malammart">@Malammart</a></dd>
+
+						<dt><strong>Commissioned by</strong></dt>
+						<dd>Radio</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>10 September 2024</dd>
+					</dl>
+					
+					<dl id="#tinne-details">
+						<dt><strong>Author's commentary</strong></dt>
+						<dd>"A gift for Diaz's first year on YouTube as a monetized vtuber."</dd>
+		
+						<dt><strong>Author</strong></dt>
+						<dd><a href="https://github.com/tinne26/">tinne</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>1 September 2024</dd>
+					</dl>
+					
+					<dl id="#hein-punk-details">	
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>24 February 2024</dd>
+					</dl>
+					
+					<dl id="#kappa-bean-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.youtube.com/@KappaKuro">Kappa</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>14 January 2024</dd>
+					</dl>
+
+					<dl id="#kappa-marine-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Related to the game <a href="https://www.focus-entmt.com/en/games/warhammer-40000-space-marine-2">Warhammer 40000: Space Marine 2</a>, which Kappa, Tengu and Diaz were playing together at the time.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.youtube.com/@KappaKuro">Kappa</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>21 September 2024</dd>
+					</dl>
+					
+					<dl id="#hein-drunk-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>4 February 2024</dd>
+					</dl>
+					
+					<dl id="#diaz-expressions-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Sketches of the whole gang drawn by Diaz herself.</dd>
+		
+						<dt><strong>Author</strong></dt>
+						<dd><a href="https://www.youtube.com/@diazvtuber">Diaz</a></dd>
+		
+						<dt><strong>Creation date</strong></dt>
+						<dd>June/July 2023</dd>
+					</dl>
+					
+					<dl id="#hein-tongue-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.instagram.com/hellsing_danchou">Hein</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>10 August 2023</dd>
+					</dl>
+				</div>
+
+				<div class="frame">
+					<div class="interblock" style="margin-top: 48px;"><span>····</span></div>
+
+					<div class="block">
+						<p>(There's quite a bit more art that would be awesome to add, but I'm still waiting for responses or haven't managed to contact the creators)</p>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<a href="/about"><svg><use href="/assets/icons.svg#bolt"/></svg> about this website <svg><use href="/assets/icons.svg#bolt"/></svg></a>
+			</footer>
+		</div>
+	</body>
+</html>

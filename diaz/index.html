@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>About Diaz</title>
+		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
+		<link href="/assets/style.css" rel="stylesheet">
+		<script src="/assets/code.js"></script>
+		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+	</head>
+
+	<body>
+		<div class="footer-spacer">
+			<div class="content">
+				<div class="frame">
+					<div class="header">
+						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
+						<h1><a href="/">About Diaz</a></h1>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>
+					</div>
+	
+					<div class="block">
+						<h2>Inside Diaz's world</h2>
+						<p>Dying to learn more about Diaz? She would be delighted.</p>
+						<ul>
+							<li><a href="/diaz/lore">Lore</a>: origins, legend and lore.</li>
+							<li><a href="/diaz/streams">Streams</a>: what, when and with who.</li>
+							<li><a href="/diaz/games">Games</a>: a list of the games Diaz has played.</li>
+							<li><a href="/diaz/personality">Personality</a>: if you gaze long into the Diaz, the Diaz will probably...</li>
+						</ul>
+					</div>
+
+					<div class="interblock"><span>····</span></div>
+
+					<div class="block">
+						<div class="flexsplitrow">
+							<h2>Did you know...?</h2>
+							<button class="trivia float" name="menu" onclick="rerollTrivia();">
+								<span>next random fact <svg class="trivia" viewBox="0 -960 960 960"><path d="M300-240q25 0 42.5-17.5T360-300q0-25-17.5-42.5T300-360q-25 0-42.5 17.5T240-300q0 25 17.5 42.5T300-240Zm0-360q25 0 42.5-17.5T360-660q0-25-17.5-42.5T300-720q-25 0-42.5 17.5T240-660q0 25 17.5 42.5T300-600Zm180 180q25 0 42.5-17.5T540-480q0-25-17.5-42.5T480-540q-25 0-42.5 17.5T420-480q0 25 17.5 42.5T480-420Zm180 180q25 0 42.5-17.5T720-300q0-25-17.5-42.5T660-360q-25 0-42.5 17.5T600-300q0 25 17.5 42.5T660-240Zm0-360q25 0 42.5-17.5T720-660q0-25-17.5-42.5T660-720q-25 0-42.5 17.5T600-660q0 25 17.5 42.5T660-600ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/></svg></span>
+							</button>
+						</div>
+						<div class="quote">
+							<p id="trivia-bit">...that you need to enable javascript to see random trivia bits? Or click on "all trivia facts"!</p>
+						</div>
+						<div style="margin-top: 16px;">
+							<a href="/diaz/trivia">
+								<span><svg class="trivia" viewBox="0 -960 960 960"><path d="M280-160v-441q0-33 24-56t57-23h439q33 0 56.5 23.5T880-600v287q0 16-6 30.5T857-257L703-103q-11 11-25.5 17T647-80H360q-33 0-56.5-23.5T280-160ZM81-710q-6-33 13-59.5t52-32.5l434-77q33-6 59.5 13t32.5 52l10 54H360q-66 0-113 47t-47 113v382q-16-9-27.5-24T158-276L81-710Zm719 390H680q-17 0-28.5 11.5T640-280v120l160-160Z"/></svg> trivia facts list</span>
+							</a>
+						</div>
+					</div>
+
+					<div class="hidden" id="trivia-facts">
+						<p>...that despite looking like a school girl, Diaz is 64 years old?</p>
+						<p>...that the name "Diaz" is a phonetic transliteration of "Zeus" (Δίας) pronounced in greek (/ˈði.as/)?</p>
+						<p>...that Diaz's model design is partially inspired by Zenitsu Agatsuma from Demon Slayer?</p>
+						<p>...that Diaz claims she's 200 feet tall? Though <a href="https://www.youtube.com/shorts/FGIpR8K0R8c">not everyone believes her</a>...</p>
+						<p>...that Diaz is an addict to Red Bull, smoking and Fortnite, among others?</p>
+						<p>...that Diaz loves gifts and compliments—regardless of how patently you lie to her?</p>
+						<p>...that Diaz only uses the left earcup of her headphones while streaming?</p>
+						<p>...that Diaz's longest streaming session has been Stray (10h 24m)?</p>
+						<p>...that Diaz has been three times to Japan?</p>
+						<p>...that yellow and orange are among Diaz's least favourite colors?</p>
+						<p>...that Diaz's favorite food is spaghetti with tomato sauce and feta cheese?</p>
+						<!-- some extra funny facts/disses/secrets that are not on the main list -->
+						<p>...that Diaz is good at imitating animal voices? Except for <a href="https://www.youtube.com/shorts/F-9tN_LKvxM">donkeys</a>. No matter <a href="https://www.youtube.com/clip/UgkxrOkdk7HJUjGRLBF1fTHSCVh08lm01CYL">how much she practices</a>.</p>
+						<p>...that Diaz has a rare condition that makes her practically blind to <a href="https://www.twitch.tv/mightydiaz/clip/SteamyColorfulSangKevinTurtle-dgZ3l6VztrPub_qu">game UIs</a>?</p>
+						<p>...that this website has a secret Pokémon-related page?</p>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<a href="/about"><svg><use href="/assets/icons.svg#bolt"/></svg> about this website <svg><use href="/assets/icons.svg#bolt"/></svg></a>
+			</footer>
+		</div>
+	</body>
+</html>

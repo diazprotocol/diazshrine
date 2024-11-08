@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Diaz quiz</title>
+		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
+		<link href="/assets/style.css" rel="stylesheet">
+		<script src="/assets/code.js"></script>
+		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+	</head>
+
+	<body>
+		<div class="footer-spacer">
+			<div class="content">
+				<div class="frame">
+					<div class="header">
+						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
+						<h1><a href="/playroom/">Diaz quiz</a></h1>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>						
+					</div>
+	
+					<div class="block quiz" id="start">
+						<h2>It's quiz time!</h2>
+						<p>Prove that you are a total Diaz addict by getting the top score in this quiz!</p>
+						<p>You will have to answer ten questions by picking the correct answer. No time limits, just correct answers. Are you ready? Go on then, press start!</p>
+						<div><button onclick="quizNext(event);">Start</button></div>
+					</div>
+
+					<div class="block quiz awaiting" id="question">
+						<!-- question data will be copied here dynamically -->
+					</div>
+
+					<div class="block quiz awaiting" id="results">
+						<h2 id="results-title">Results: N/10</h2>
+						<p id="result-0">You have proved your inadequacy to be anywhere near our Oni Queen. You couldn't do worse even if you tried. We shall banish you from the internet and teach our children your story; the story of the kind of being they must never devolve into. Shameful.</p>
+						<p id="result-1">You should be ashamed of yourself. The chances of doing worse than this are laughably low even if you answer completely at random. Disgraceful. Please leave... and don't show your face around here in a while.</p>
+						<p id="result-2">Are you reaaaaaally this bad..? And you still decided to give the quiz a go? Damn. You should really have more self-respect than this... and spare us this pathetic sight.</p>
+						<p id="result-3">Pathetic. I'd hide in my room for a whole month if I dishonored our Queen like this. You better start watching a Diaz VOD every day, for a month or two, before trying again. Now begoooone!</p>
+						<p id="result-4">Insufficient. You can't present yourself to the Oni Queen in this state. You would be crushed, both physically and psychologically. A journey of betterment is sorely needed; train your body, train your mind, watch Diaz VODs. Rinse and repeat. And repeat.. and repeat... and...</p>
+						<p id="result-5">Yeah... you got a 5, but this can't really be considered a passing grade; our Queen deserves the stars, not these half-assed offerings. If you want to rise through the ranks, you have to prove your worth. Wooork haaaaarder, you lazy minion!!</p>
+						<p id="result-6">Even if we were trying to be as generous as our Oni Queen and assume you got unlucky, this barely qualifies as an acceptable result. You can't get complacent with your current state. You must commit to bring every bit of Diaz trivia closer to your memory, to your heart, to your very soul. You are not there yet. You are not ripe enough.</p>
+						<p id="result-7">An acceptable result. You might have earned yourself the right to be called a "minion", but the journey ahead of you remains long and tortuous. Keep on walking the path, and don't forget to stop every few steps to thank Diaz for existing.</p>
+						<p id="result-8">A decent result. You have proved to be a committed servant, even if you are still not among the most brilliant ones. You mask blends seamlessly amidst the army members now, but... will you be able to cross the threshold and finally distinguish yourself as a warrior worthy of mention on the legendary Oni Queen chronicles? Only time will tell...</p>
+						<p id="result-9">A good result. This is what we would expect from those that dedicate their body and soul to serve the Oni Queen. But are you really such a praiseworthy minion? True commitment is not about reaching a milestone, but proving yourself day after day without ever letting our Queen down. To become a pillar strong enough to withstand her rage. Beautiful enough to stop offending her sight. Rich enough to keep the Red Bull stocked. Serene enough to endure her questionable opinions.</p>
+						<p id="result-10">Wouldn't expect any less. You deserve some commendation for your efforts.<br>Unless you try again and fall short of perfection, hmm..? That would be a disappointment, wouldn't it..?</p>
+						<p id="result-11">Wouldn't expect any less. You deserve some commendation for your repeated efforts.<br>Unless you try again and fall short of perfection, hmm..? That would be a disappointment, wouldn't it..?</p>
+						<p id="result-12">You shouldn't have wanted to know everything so badly... now you will know <a href="https://www.youtube.com/clip/Ugkx9EoCvw9MupkuXjYYW9ev0z_PVEGlrq23">too much</a>.</p>
+						<p>Not satisfied yet? You can always...</p>
+						<div><button onclick="quizNext(event);">Restart</button></div>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<a href="/about"><svg><use href="/assets/icons.svg#bolt"/></svg> about this website <svg><use href="/assets/icons.svg#bolt"/></svg></a>
+			</footer>
+		</div>
+
+		<!-- quiz questions -->
+		<div class="hidden" id="quiz-questions">
+			<div id="37E490" data-shuffle="yes">
+				<p>Which of the following races <i>hasn't</i> become a target of Diaz's simping? (Publicly admitted, at least)</p>
+				<div data-answer="CBAA88"><button>Turtles</button></div>
+				<div data-answer="DC4218"><button>Foxes</button></div>
+				<div data-answer="BB4452"><button>Lions</button></div>
+				<div data-answer="E699F7"><button>Pandas</button></div>
+			</div>
+
+			<div id="8FDA16" data-shuffle="yes">
+				<p>Which of the following behaviors would be most inappropriate towards the Oni Queen?</p>
+				<div data-answer="8F8495"><button>Stalking</button></div>
+				<div data-answer="AB1289"><button>Hugging</button></div>
+				<div data-answer="318D1D"><button>Fawning</button></div>
+				<div data-answer="1E63A1"><button>Writing a diss track</button></div>
+				<div data-answer="390045"><button>Genuflecting</button></div>
+			</div>
+
+			<div id="F1121E" data-shuffle="yes">
+				<p>Which of the following groups is the <i>least frequent</i> target of discrimination by Diaz?</p>
+				<div data-answer="BAB8B2"><button>Bald people</button></div>
+				<div data-answer="BEA5C8"><button>Aliens</button></div>
+				<div data-answer="025BDA"><button>Overweight people</button></div>
+				<div data-answer="EF62A9"><button>Elderly people</button></div>
+				<div data-answer="1BEB23"><button>Cripples</button></div>
+			</div>
+			
+			<div id="400C91" data-shuffle="yes">
+				<p>What's the pokemon Diaz can't stop talking about?</p>
+				<div data-answer="EA87BA"><button>Pikachu</button></div>
+				<div data-answer="0D9C92"><button>Gardevoir</button></div>
+				<div data-answer="39CAA4"><button>Psyduck</button></div>
+				<div data-answer="18A17A"><button>Jigglypuff</button></div>
+			</div>
+
+			<div id="C8C1F1" data-shuffle="yes">
+				<p>Diaz has had art commissioned for many games and franchises, but none involving or making any nods to...</p>
+				<div data-answer="A01A4A"><button>Doki Doki Literature Club</button></div>
+				<div data-answer="95C71D"><button>Demon Slayer</button></div>
+				<div data-answer="AC69CB"><button>Psychonauts</button></div>
+				<div data-answer="1DA23A"><button>One Piece</button></div>
+				<div data-answer="FD3653"><button>Little Witch Academia</button></div>
+				<div data-answer="A16D80"><button>Hollow Knight</button></div>
+			</div>
+
+			<div id="316ACC" data-shuffle="yes">
+				<p>What's the name of Diaz's pink haired creation?</p>
+				<div data-answer="F7693C"><button>Julius</button></div>
+				<div data-answer="7F005E"><button>Sbeve</button></div>
+				<div data-answer="D47BEF"><button>Kairo</button></div>
+				<div data-answer="576C8E"><button>Rune</button></div>
+			</div>
+
+			<div id="6E6ED7" data-shuffle="yes">
+				<p>How tall is Diaz?</p>
+				<div data-answer="8C0C79"><button>200m</button></div>
+				<div data-answer="F975D1"><button>60m</button></div>
+				<div data-answer="CA304D"><button>3m</button></div>
+				<div data-answer="AED498"><button>1.74m</button></div>
+				<div data-answer="B50E06"><button>1.26m</button></div>
+			</div>
+
+			<div id="0121CD" data-shuffle="no">
+				<p>What year did Diaz begin streaming?</p>
+				<div data-answer="2D3861"><button>2018</button></div>
+				<div data-answer="0C9FE8"><button>2019</button></div>
+				<div data-answer="2A4BA7"><button>2020</button></div>
+				<div data-answer="3EBD7F"><button>2021</button></div>
+				<div data-answer="49B5E5"><button>2022</button></div>
+				<div data-answer="508DB2"><button>2023</button></div>
+				<div data-answer="79A986"><button>2024</button></div>
+			</div>
+
+			<div id="EC5546" data-shuffle="no">
+				<p>What year was Diaz born?</p>
+				<div data-answer="9DF6E9"><button>1958</button></div>
+				<div data-answer="C4E599"><button>1959</button></div>
+				<div data-answer="D4BC24"><button>1960</button></div>
+				<div data-answer="10F2CC"><button>1961</button></div>
+				<div data-answer="355B4A"><button>1962</button></div>
+				<div data-answer="183B97"><button>1963</button></div>
+				<div data-answer="43DCC5"><button>1964</button></div>
+			</div>
+
+			<div id="E028F8" data-shuffle="yes">
+				<p>What should you never feed Diaz?</p>
+				<div data-answer="26E4EA"><button>Tagliatelle</button></div>
+				<div data-answer="CAF817"><button>Coriander</button></div>
+				<div data-answer="5D7521"><button>Expired chocolate</button></div>
+				<div data-answer="F34722"><button>Blueberries</button></div>
+			</div>
+
+			<div id="99E473" data-shuffle="yes">
+				<p>Little Diaz is a...</p>
+				<div data-answer="60FCE0"><button>Oni</button></div>
+				<div data-answer="73F20E"><button>Human</button></div>
+				<div data-answer="A278EC"><button>Cat</button></div>
+				<div data-answer="9AB831"><button>Monkey</button></div>
+			</div>
+
+			<div id="A52473" data-shuffle="yes">
+				<p>Who's a good boy?</p>
+				<div data-answer="4127CB"><button>Sawyer</button></div>
+				<div data-answer="62A3B1"><button>Miles</button></div>
+				<div data-answer="3B4BC2"><button>Spencer</button></div>
+				<div data-answer="BD406F"><button>Parker</button></div>
+			</div>
+
+			<div id="3CF14E" data-shuffle="yes">
+				<p>Who's the imposter?</p>
+				<div data-answer="6E30DB"><button>Panda</button></div>
+				<div data-answer="D5EB2C"><button>Tanuki</button></div>
+				<div data-answer="B10C34"><button>Bunny</button></div>
+				<div data-answer="25259D"><button>Kappa</button></div>
+			</div>
+
+			<div id="091540" data-shuffle="yes">
+				<p>When you serve Diaz Red Bull, it should preferentially be...</p>
+				<div data-answer="30692B"><button>Red Bull Zero</button></div>
+				<div data-answer="3276D3"><button>Red Bull Original</button></div>
+				<div data-answer="510A0B"><button>Red Bull Sugarfree</button></div>
+				<div data-answer="2364E1"><button>Red Bull Blue</button></div>
+			</div>
+
+			<div id="844848" data-shuffle="yes">
+				<p>Early Diaz twitter was cringe af, but she never said...</p>
+				<div data-answer="08F287"><button>Please make a trend where I don't have to show my tiny boobs, thank you.</button></div>
+				<div data-answer="C5BEE8"><button>Someday I'll tweet smthng and it will get 500 likes.</button></div>
+				<div data-answer="24054B"><button>Petition to get a nose bleed emoji. It's needed for my everyday conversations.</button></div>
+				<div data-answer="E8B145"><button>I hope every vtuber plays tic tac toe on my forehead.</button></div>
+			</div>
+
+			<div id="53F90A" data-shuffle="yes">
+				<p>Which of the following hobbies doesn't quite apply to Diaz?</p>
+				<div data-answer="2C141F"><button>Dancing</button></div>
+				<div data-answer="700C6B"><button>Dolls</button></div>
+				<div data-answer="C34FFA"><button>Cooking</button></div>
+				<div data-answer="032C0D"><button>Manga</button></div>
+			</div>
+
+			<div id="86CA32" data-shuffle="no">
+				<p>How many people who watched Diaz's debut reached 1+ year of membership on her channel, without counting Kappa and Tengu?</p>
+				<div data-answer="30D793"><button>None</button></div>
+				<div data-answer="840A72"><button>Only one</button></div>
+				<div data-answer="F7AFCA"><button>Between 2 and 4</button></div>
+				<div data-answer="FBAC45"><button>More than 4</button></div>
+			</div>
+
+			<div id="6B710C" data-shuffle="yes">
+				<p>What game did Diaz play on her debut as a VTuber?</p>
+				<div data-answer="7F0DA2"><button>Hollow Knight</button></div>
+				<div data-answer="99B2F9"><button>Identity V</button></div>
+				<div data-answer="BF66C6"><button>The Wolf Among Us</button></div>
+				<div data-answer="558909"><button>Phasmophobia</button></div>
+			</div>
+
+			<div id="73914B" data-shuffle="yes">
+				<p>Which of the following games did Diaz manage to complete in a single stream?</p>
+				<div data-answer="4CC35D"><button>Hotline Miami</button></div>
+				<div data-answer="88B2A1"><button>Stray</button></div>
+				<div data-answer="72B5F7"><button>Jump King</button></div>
+				<div data-answer="458309"><button>Little Nightmares</button></div>
+			</div>
+
+			<div id="B953F9" data-shuffle="yes">
+				<p>Which of the following games did Diaz enjoy most playing?</p>
+				<div data-answer="1BD69A"><button>Palworld</button></div>
+				<div data-answer="5BA829"><button>Jump King</button></div>
+				<div data-answer="F4DCD3"><button>South Park Snowday</button></div>
+				<div data-answer="3D4942"><button>Kindergarten</button></div>
+			</div>
+
+			<div id="DB529F" data-shuffle="no">
+				<p>How long was Diaz's longest stream?</p>
+				<div data-answer="67CDDF"><button>Around 8 hours</button></div>
+				<div data-answer="684E70"><button>Around 10 hours</button></div>
+				<div data-answer="C7CF6A"><button>Around 12 hours</button></div>
+				<div data-answer="950F23"><button>Around 14 hours</button></div>
+				<div data-answer="427CFF"><button>Around 16 hours</button></div>
+			</div>
+
+			<div id="991AAD" data-shuffle="yes">
+				<p>Which of Kappa's pets is named after Diaz?</p>
+				<div data-answer="F5AC53"><button>Dog</button></div>
+				<div data-answer="1D3F66"><button>Lizard</button></div>
+				<div data-answer="D731C4"><button>Snake</button></div>
+				<div data-answer="2E8152"><button>Cat</button></div>
+				<div data-answer="21188B"><button>Rat</button></div>
+			</div>
+
+			<div id="2D100F" data-shuffle="yes">
+				<p>Although Diaz isn't great at singing, she once wrote and sung her own lyrics for a game. We are talking about...</p>
+				<div data-answer="3A630C"><button>Doki Doki Literature Club</button></div>
+				<div data-answer="C280DF"><button>Kindergarten</button></div>
+				<div data-answer="09C680"><button>To the Moon</button></div>
+				<div data-answer="9EB47E"><button>Minecraft</button></div>
+			</div>
+
+			<div id="92AB34" data-shuffle="yes">
+				<p>The psyduck emote was first added and revealed by Tengu during a stream for...</p>
+				<div data-answer="A8139D"><button>Hollow Knight</button></div>
+				<div data-answer="B974E4"><button>Persona 5 Royal</button></div>
+				<div data-answer="974B3E"><button>Psychonauts</button></div>
+				<div data-answer="00FC13"><button>Beyond Two Souls</button></div>
+			</div>
+
+			<div id="EA417E" data-shuffle="yes">
+				<p>Diaz's main avatar during Fortnite streams with members has been...</p>
+				<div data-answer="A2529D"><button>A catwoman-like character</button></div>
+				<div data-answer="2CB6C5"><button>An autumn tree</button></div>
+				<div data-answer="12BFAF"><button>A yellow humanoid chicken</button></div>
+				<div data-answer="EEEF7B"><button>Lara Croft</button></div>
+				<div data-answer="922E71"><button>Sakura Haruno</button></div>
+				<div data-answer="B7CBD2"><button>Vi (LoL)</button></div>
+				<div data-answer="AB4A98"><button>A banana</button></div>
+			</div>
+
+			<div id="68BF7B" data-shuffle="no">
+				<p>Does Diaz collaborate with other VTubers? (Not counting Kappa and Tengu)</p>
+				<div data-answer="71960A"><button>No, she has no friends</button></div>
+				<div data-answer="66270F"><button>Yes, but only BubblyBunny</button></div>
+				<div data-answer="82FB56"><button>Yes, but only very rarely</button></div>
+				<div data-answer="D36520"><button>Yes, quite often</button></div>
+			</div>
+
+			<div id="41DF41" data-shuffle="yes">
+				<p>When it comes to games, what's known to ruffle Tengu's feathers just right?</p>
+				<div data-answer="D005FC"><button>Hard puzzles</button></div>
+				<div data-answer="26E6D3"><button>Hard skill challenges</button></div>
+				<div data-answer="263419"><button>Good graphics</button></div>
+				<div data-answer="7F934A"><button>Good lore</button></div>
+			</div>
+
+			<div id="695C56" data-shuffle="yes">
+				<p>What should you never mention in front of Diaz?</p>
+				<div data-answer="2688F8"><button>The length of her horns</button></div>
+				<div data-answer="28C7BE"><button>The size of her mouth</button></div>
+				<div data-answer="CB4B0E"><button>Her age</button></div>
+				<div data-answer="B6B360"><button>Her tummy</button></div>
+			</div>
+
+			<div id="46A10F" data-shuffle="yes">
+				<p>Which of the following color pairs would Diaz prefer?</p>
+				<div data-answer="79F40F"><button>Black and white</button></div>
+				<div data-answer="A0198C"><button>Yellow and orange</button></div>
+				<div data-answer="B52D37"><button>Red and blue</button></div>
+				<div data-answer="040CB6"><button>Black and magenta</button></div>
+				<div data-answer="7621D4"><button>Pink and blue</button></div>
+				<div data-answer="738173"><button>Lime and cyan</button></div>
+			</div>
+
+			<div id="3BF148" data-shuffle="yes">
+				<p>Which of the following foods is Diaz more passionate about?</p>
+				<div data-answer="69A60F"><button>Salads</button></div>
+				<div data-answer="458A2F"><button>Spaghetti</button></div>
+				<div data-answer="FC55DB"><button>Burgers</button></div>
+				<div data-answer="89E492"><button>Rice</button></div>
+				<div data-answer="9178F4"><button>Soup</button></div>
+				<div data-answer="789ABE"><button>Sushi</button></div>
+			</div>
+
+			<div id="3EDF54" data-shuffle="yes">
+				<p>Which of the following game genres does Diaz dislike most?</p>
+				<div data-answer="8656C7"><button>Horror games</button></div>
+				<div data-answer="682DCF"><button>First-person shooters</button></div>
+				<div data-answer="F5B164"><button>Puzzle games</button></div>
+				<div data-answer="07695F"><button>Story driven games</button></div>
+				<div data-answer="AF6D74"><button>Farming sims</button></div>
+			</div>
+
+			<div id="5148A3" data-shuffle="no">
+				<p>How many earrings does Diaz wear on her pointy ears?</p>
+				<div data-answer="74BB64"><button>0</button></div>
+				<div data-answer="D9E97F"><button>1</button></div>
+				<div data-answer="CC2066"><button>2</button></div>
+				<div data-answer="D6AD84"><button>3</button></div>
+				<div data-answer="F4C078"><button>4</button></div>
+				<div data-answer="392725"><button>5</button></div>
+			</div>
+
+			<div id="E829E4" data-shuffle="yes">
+				<p>What color is Diaz's tongue?</p>
+				<div data-answer="15DC67"><button>Blue</button></div>
+				<div data-answer="B45796"><button>Red</button></div>
+				<div data-answer="1A990B"><button>Purple</button></div>
+				<div data-answer="093B30"><button>Pink</button></div>
+			</div>
+
+			<div id="0B0888" data-shuffle="yes">
+				<p>What hashtag are you supposed to use when sharing Diaz art on Twitter?</p>
+				<div data-answer="651D6C"><button>#diazart</button></div>
+				<div data-answer="830B7E"><button>#diazvtart</button></div>
+				<div data-answer="4D5EF0"><button>#diartz</button></div>
+				<div data-answer="922126"><button>#diazartz</button></div>
+			</div>
+
+			<div id="C00717" data-shuffle="yes">
+				<p>Which artist designed Diaz's first VTuber model?</p>
+				<div data-answer="2C2349"><button>Sakino Shingetu</button></div>
+				<div data-answer="2C9913"><button>Owozora</button></div>
+				<div data-answer="1E19BB"><button>Utyako</button></div>
+				<div data-answer="628703"><button>Shouu Kyun</button></div>
+				<div data-answer="71B6BD"><button>Kiritzugu</button></div>
+			</div>
+
+			<div id="3B01F5" data-shuffle="yes">
+				<p>Which artist designed Diaz YouTube emotes?</p>
+				<div data-answer="97D078"><button>Sakino Shingetu</button></div>
+				<div data-answer="D168B0"><button>Owozora</button></div>
+				<div data-answer="C0FF54"><button>Utyako</button></div>
+				<div data-answer="56F9C0"><button>Hoopyon</button></div>
+				<div data-answer="A0BD30"><button>Kiritzugu</button></div>
+			</div>
+
+			<div id="AF5F13" data-shuffle="no">
+				<p>How many hours did it take Diaz to reach her first Hollow Knight ending?</p>
+				<div data-answer="FC62E7"><button>13 hours</button></div>
+				<div data-answer="3CD85E"><button>39 hours</button></div>
+				<div data-answer="A28114"><button>81 hours</button></div>
+				<div data-answer="95EB5A"><button>117 hours</button></div>
+			</div>
+
+			<div id="D11A0D" data-shuffle="no">
+				<p>How many languages can Diaz speak?</p>
+				<div data-answer="C62139"><button>1</button></div>
+				<div data-answer="549D81"><button>2</button></div>
+				<div data-answer="EE8415"><button>3</button></div>
+				<div data-answer="8C7D86"><button>4</button></div>
+				<div data-answer="C98256"><button>5</button></div>
+			</div>
+
+			<div id="21C600" data-shuffle="yes">
+				<p>What the name of Diaz's mother?</p>
+				<div data-answer="D14046"><button>Ibaraki</button></div>
+				<div data-answer="925448"><button>Izanami</button></div>
+				<div data-answer="5731B7"><button>Akasha</button></div>
+				<div data-answer="0684F2"><button>Akako</button></div>
+				<div data-answer="852D04"><button>Yamanba</button></div>
+				<div data-answer="1BAF17"><button>Yamika</button></div>
+			</div>
+
+			<div id="506672" data-shuffle="yes">
+				<p>You know Diaz's signature greeting, right..?</p>
+				<div data-answer="59E683"><button>Tadaaaaa! Thank you eeeeeveryone for joining!</button></div>
+				<div data-answer="416B3A"><button>Hello hello hellooo there! Hey everybody!</button></div>
+				<div data-answer="B4620D"><button>Welcoooooome!! Happy {day of the week} everybody!</button></div>
+				<div data-answer="E26C5A"><button>Hellooooooo???? Helloooo everybody!!</button></div>
+				<div data-answer="5593B7"><button>Welcooome everybuudddyyyyy!!</button></div>
+			</div>
+
+			<div id="82CFDB" data-shuffle="yes">
+				<p>Diaz loves reading...</p>
+				<div data-answer="48DD17"><button>"Essays"</button></div>
+				<div data-answer="50B901"><button>"Novels"</button></div>
+				<div data-answer="AC8945"><button>"Writings"</button></div>
+				<div data-answer="7879E8"><button>"Literature"</button></div>
+				<div data-answer="7D22E4"><button>"Compositions"</button></div>
+			</div>
+
+			<div id="B6E9FB" data-shuffle="yes">
+				<p>Diaz has a condition that hinders her ability to see...</p>
+				<div data-answer="94BDE1"><button>Yellow paint</button></div>
+				<div data-answer="13DA45"><button>The current stream duration</button></div>
+				<div data-answer="430E81"><button>Videogame user interfaces</button></div>
+				<div data-answer="FAEB89"><button>People's intentions</button></div>
+				<div data-answer="EBD535"><button>Differences between green-ish colors</button></div>
+				<div data-answer="AFF7EE"><button>YouTube superchats</button></div>
+			</div>
+
+			<div id="1162D5" data-shuffle="no">
+				<p>How many times has Diaz been to Japan?</p>
+				<div data-answer="4194FD"><button>0</button></div>
+				<div data-answer="79AAD0"><button>1</button></div>
+				<div data-answer="866776"><button>2</button></div>
+				<div data-answer="9BB58B"><button>3</button></div>
+				<div data-answer="D0E006"><button>4</button></div>
+			</div>
+
+			<div id="" data-shuffle="no">
+				<p>When was Diaz's model first shown?</p>
+				<div data-answer=""><button>May 2021</button></div>
+				<div data-answer=""><button>July 2021</button></div>
+				<div data-answer=""><button>December 2021</button></div>
+				<div data-answer=""><button>February 2022</button></div>
+				<div data-answer=""><button>July 2022</button></div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Official Diaz art</title>
+		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
+		<link href="/assets/style.css" rel="stylesheet">
+		<script src="/assets/code.js"></script>
+		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+	</head>
+
+	<body>
+		<!-- this div is for overlays, managed through js, ignore -->
+		<div>
+			<!-- dual mode (image + info) -->
+			<div class="imgview hidden" id="imgview-dual">
+				<div class="dual">
+					<div style="position: relative;">
+						<img src="" class="dual-image" id="imgview-image-dual">
+						<div class="img-buttons float-buttons">
+							<button aria-label="previous image" onclick="galleryPrevImage();"><svg viewBox="0 -960 960 960"><path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z"/></svg></button>
+							<button aria-label="back to gallery" onclick="backToGallery();"><svg viewBox="0 -960 960 960"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+							<button aria-label="image close-up mode" onclick="galleryToCloseUpMode();"><svg viewBox="0 -960 960 960"><path d="M822-26 686-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800l80 80h-80v480h446l-80-80H240v-80h206L26-822l56-56L878-82l-56 56Zm48-178-70-70v-446H354l-80-80h526q33 0 56.5 23.5T880-720v476q0 11-2 21t-8 19ZM594-480l-80-80h206v80H594Zm-354 0v-80h80v80h-80Zm337-17Zm-194 34Z"/></svg></button>
+							<button aria-label="next image" onclick="galleryNextImage();"><svg viewBox="0 -960 960 960"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg></button>
+						</div>
+					</div>
+					<div style="margin: 8px;"></div> <!-- separator/gap -->
+					<dl class="dual-info" id="imgview-dl-dual"></dl>
+				</div>
+			</div>
+
+			<!-- close up mode (only image) -->
+			<div class="imgview hidden" id="imgview-close-up">
+				<div class="gallery-vert-centered fullsize" id="close-up-fullsize">
+					<img src="" class="img-close-up" id="imgview-image-close-up">
+					<div class="img-buttons">
+						<button aria-label="previous image" onclick="galleryPrevImage();"><svg viewBox="0 -960 960 960"><path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z"/></svg></button>
+						<button aria-label="back to gallery" onclick="backToGallery();"><svg viewBox="0 -960 960 960"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+						<button aria-label="show information" onclick="galleryLeaveCloseUpMode();"><svg viewBox="0 -960 960 960"><path d="M240-320h320v-80H240v80Zm400 0h80v-80h-80v80ZM240-480h80v-80h-80v80Zm160 0h320v-80H400v80ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/></svg></button>
+						<button aria-label="next image" onclick="galleryNextImage();"><svg viewBox="0 -960 960 960"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- info mode (only image details) -->
+			<div class="imgview hidden" id="imgview-details">
+				<div class="gallery-vert-centered">
+					<div class="gallery-vert-centered" style="position: relative;">
+						<div class="img-background"><img src="" class="img-details" id="imgview-image-details"></div>
+						<dl class="details-info" id="imgview-dl-details"></dl>
+					</div>
+					<div class="img-buttons">
+						<button aria-label="previous image" onclick="galleryPrevImage();"><svg viewBox="0 -960 960 960"><path d="m432-480 156 156q11 11 11 28t-11 28q-11 11-28 11t-28-11L348-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 28-11t28 11q11 11 11 28t-11 28L432-480Z"/></svg></button>
+						<button aria-label="back to gallery" onclick="backToGallery();"><svg viewBox="0 -960 960 960"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+						<button aria-label="leave details mode" onclick="galleryLeaveDetailsMode();"><svg viewBox="0 -960 960 960"><path d="M822-26 686-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800l80 80h-80v480h446l-80-80H240v-80h206L26-822l56-56L878-82l-56 56Zm48-178-70-70v-446H354l-80-80h526q33 0 56.5 23.5T880-720v476q0 11-2 21t-8 19ZM594-480l-80-80h206v80H594Zm-354 0v-80h80v80h-80Zm337-17Zm-194 34Z"/></svg></button>
+						<button aria-label="next image" onclick="galleryNextImage();"><svg viewBox="0 -960 960 960"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- main content -->
+		<div class="footer-spacer">
+			<div class="content">
+				<div class="frame">
+					<div class="header">
+						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
+						<h1><a href="/art/">Official Diaz art</a></h1>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>
+					</div>
+				</div>
+
+				<div class="gallery" id="gallery">
+					<div>
+						<a href="#school-v"><img loading="lazy" id="#school-v-source" src="/assets/art/official/mini/school_v.webp" alt="Diaz jumping of happiness, wearing a school uniform, holding a bokken and surrounded by a couple minions."></a>
+						<a href="#gorilla"><img loading="lazy" id="#gorilla-source" src="/assets/art/official/mini/gorilla.webp" alt="Diaz in a gorilla outfit, with a big zipper on the chest."></a>
+						<a href="#cooking"><img loading="lazy" id="#cooking-source" src="/assets/art/official/mini/cooking.webp" alt="Tengu cooking and Diaz slightly drooling in expectation."></a>
+						<a href="#christmas"><img loading="lazy" data-ffmt="jpg" id="#christmas-source" src="/assets/art/official/mini/christmas.webp" alt="Diaz in a christmas outfit offering a present to the viewer."></a>
+						<a href="#suikawari"><img loading="lazy" id="#suikawari-source" src="/assets/art/official/mini/suikawari.webp" alt="Diaz wearing a bikini and playing suikawai (a game where you split a watermelon with a stick while blindfolded) at the beach. Tengu is looking at the scene in panic as Kappa's gluttony and unawareness lead him to hug the watermelon, getting right in the middle of Diaz's path."></a>
+						<a href="#cloud"><img loading="lazy" data-ffmt="jpeg" id="#cloud-source" src="/assets/art/official/mini/cloud.webp" alt="Diaz sitting on a cloud with an ambitious and somewhat smug grin."></a>
+						
+						<a href="#clover-senpai"><img loading="lazy" id="#clover-senpai-source" src="/assets/art/official/mini/clover_senpai.webp" alt="Diaz and Clover Senpai in a scene that could be depicted as a Red Volt promotion shot, in a cool local and wearing Red Volt-inspired dresses to match."></a>
+						<a href="#cow"><img loading="lazy" id="#cow-source" src="/assets/art/official/mini/cow.webp" alt="Diaz riding a completely white cow, with Kappa and Tengu tagging along."></a>
+						<a href="#reading"><img loading="lazy" id="#reading-source" src="/assets/art/official/mini/reading.webp" alt="Diaz sitting on her messy room, tearing up while reading a manga on the Weekly Shōnen Jump, most likely referencing her love for One Piece, which also appears on the cover."></a>
+						<a href="#scared"><img loading="lazy" id="#scared-source" src="/assets/art/official/mini/scared.webp" alt="Diaz crying and scared after seeing what looks like a hitodama (a human soul as depicted in the japanese folklore)."></a>						
+						<a href="#electro"><img loading="lazy" id="#electro-source" src="/assets/art/official/mini/electro.webp" alt="A close up of Diaz's face as she satisfiedly raises a hand and shows off her control over thunder and lightning."></a>
+						<a href="#tipsy"><img loading="lazy" id="#tipsy-source" src="/assets/art/official/mini/tipsy.webp" alt="A more adult-looking than usual Diaz holds a Red Volt and blushes slightly, raising one of her legs in a lady-like manner and looking like she might be slightly tipsy."></a>
+					</div>
+
+					<div>
+						<a href="#chibi"><img loading="lazy" id="#chibi-source" src="/assets/art/official/mini/chibi.webp" alt="Chibi happy Diaz, looking like a cute doll."></a>
+						<a href="#chilling-minions"><img loading="lazy" id="#chilling-minions-source" src="/assets/art/official/mini/chilling_minions.webp" alt="Diaz lying on her belly, holding a Red Volt can and surrounded by minions."></a>
+						<a href="#kingdom-hearts"><img loading="lazy" data-ffmt="jpg" id="#kingdom-hearts-source" src="/assets/art/official/mini/kingdom_hearts.webp" alt="A very artistic portrait of a very pure and almost mystical Diaz, wearing a white dress, holding a star and being gently splashed by a wave on the beach."></a>
+						<a href="#gaming-chill"><img loading="lazy" id="#gaming-chill-source" src="/assets/art/official/mini/gaming_chill.webp" alt="Diaz lying comfy and cheerfully playing with a game controller, while a couple minions cheer for her on the background."></a>
+						<a href="#flower-crown"><img loading="lazy" id="#flower-crown-source" src="/assets/art/official/mini/flower_crown.webp" alt="Diaz sitting with a lovely flower crown."></a>
+						<a href="#jump-king"><img loading="lazy" id="#jump-king-source" src="/assets/art/official/mini/jump_king.webp" alt="Diaz with an outfit inspired on Jump King, drawn like the hero of a videogame cover, jumping to the top and with her fist pointing up."></a>
+						<a href="#gaming-shock"><img loading="lazy" data-ffmt="png" id="#gaming-shock-source" src="/assets/art/official/mini/gaming_shock.webp" alt="A black and white manga-like drawing of Diaz confused or surprised while playing with her controller, in a very unique drawing style."></a>
+						
+						<a href="#goth"><img loading="lazy" id="#goth-source" src="/assets/art/official/mini/goth.webp" alt="A goth and stylish version of Diaz, using a shirt with a minion mask in the middle."></a>
+						<a href="#zenitsu"><img loading="lazy" id="#zenitsu-source" src="/assets/art/official/mini/zenitsu.webp" alt="Diaz lies in bed dearly hugging a Zenitsu doll. Around her, two minions and Kappa also appear on the scene."></a>
+						<a href="#hades"><img loading="lazy" id="#hades-source" src="/assets/art/official/mini/hades.webp" alt="Diaz and her dad standing like a boxer their trainer confident before a fight."></a>
+						<a href="#helltaker"><img loading="lazy" data-ffmt="jpg" id="#helltaker-source" src="/assets/art/official/mini/helltaker.webp" alt="Diaz appears like a character from Helltaker, trying to put her hands on you. On the UI, her name shows up as 'Diaz the Thunder Demon' and her text reads 'Well well well. A lonely, defenceless human...'"></a>
+						<a href="#hollow-knight"><img loading="lazy" data-ffmt="png" id="#hollow-knight-source" src="/assets/art/official/mini/hollow_knight.webp" alt="Diaz with a mask from Hollow Knight, getting friendly with a grub."></a>
+					</div>
+					
+					<div>
+						<a href="#gaming-adorable"><img loading="lazy" id="#gaming-adorable-source" src="/assets/art/official/mini/gaming_adorable.webp" alt="Diaz lying adorable while holding the game controller."></a>
+						<a href="#lying-clouds"><img loading="lazy" id="#lying-clouds-source" src="/assets/art/official/mini/lying_clouds.webp" alt="Diaz lying on her back, somewhere on top of the world or the realm of the gods, with thunder effects crossing through the screen."></a>
+						<a href="#bored"><img loading="lazy" id="#bored-source" src="/assets/art/official/mini/bored.webp" alt="Diaz lying on her belly, looking bored and with a pouty face."></a>
+						<a href="#gaming-hard"><img loading="lazy" id="#gaming-hard-source" src="/assets/art/official/mini/gaming_hard.webp" alt="A colorful and slightly chaotic composition with Diaz gaming with her iconic red controller, giving her all, while minions hang around on the background."></a>
+						<a href="#little-witch-academia"><img loading="lazy" id="#little-witch-academia-source" src="/assets/art/official/mini/little_witch_academia.webp" alt="A child-like Diaz rocking a Little Witch Academia uniform, looking happy as if she just got accepted."></a>
+						<a href="#focused"><img loading="lazy" id="#focused-source" src="/assets/art/official/mini/focused.webp" alt="A frontal view of Diaz sitting on a gaming chair and using the keyboard and mouse of the computer."></a>
+						<a href="#lolita"><img loading="lazy" id="#lolita-source" src="/assets/art/official/mini/lolita.webp" alt="Diaz making a heart symbol with her hands, wearing a lolita dress and being bathed by the light that leaks through the vegetation in the background."></a>
+						
+						<a href="#lying-back"><img loading="lazy" id="#lying-back-source" src="/assets/art/official/mini/lying_back.webp" alt="Diaz lying on her back, with her legs slightly raised and looking directly towards the viewer."></a>
+						<a href="#thunder"><img loading="lazy" id="#thunder-source" src="/assets/art/official/mini/thunder.webp" alt="Diaz jumps into the air, leaning back like in a layout backflip and leaving a trail of thunder behind."></a>
+						<a href="#model"><img loading="lazy" data-ffmt="jpg" id="#model-source" src="/assets/art/official/mini/model.webp" alt="Diaz's vtuber model, standing in a neutral position and with a gentle smile on her face."></a>
+						<a href="#psychonauts"><img loading="lazy" id="#psychonauts-source" src="/assets/art/official/mini/psychonauts.webp" alt="Diaz drawn in the style of a bizarre Psychonauts character, floating on top of a green cloud, and with a green spiral on the background."></a>
+						<a href="#crown"><img loading="lazy" id="#crown-source" src="/assets/art/official/mini/crown.webp" alt="Diaz wearing a crown and displaying her lust for violence, with bloody hands and a expression to match."></a>
+						<a href="#roof"><img loading="lazy" id="#roof-source" src="/assets/art/official/mini/roof.webp" alt="Diaz sitting like a villain or cool anti-hero on a roof in the night, holding a Red Volt can and buzzing with electricity."></a>
+						<a href="#identity-v"><img loading="lazy" id="#identity-v-source" src="/assets/art/official/mini/identity_v.webp" alt="Diaz drawn in the style of Identity V: made like a doll, with eyes made of buttons, hair like ropes, visible seams and holding a gun, standing in the moonlight and grinning."></a>
+					</div>
+
+					<div>
+						<a href="#explosion-punch"><img loading="lazy" id="#explosion-punch-source" src="/assets/art/official/mini/explosion_punch.webp" alt="Diaz, Kappa and Tengu pulling off some cool Power Rangers stances. Very heroic."></a>
+						<a href="#sbeve"><img loading="lazy" id="#sbeve-source" src="/assets/art/official/mini/sbeve.webp" alt="A little Diaz holding a pink haired doll."></a>
+						<a href="#dress"><img loading="lazy" id="#dress-source" src="/assets/art/official/mini/dress.webp" alt="Diaz floating in an elegant black dress with an open back."></a>
+						<a href="#school-smoking"><img loading="lazy" id="#school-smoking-source" src="/assets/art/official/mini/school_smoking.webp" alt="Diaz looking like a thug, with a school uniform and on the school rooftop. She is squatting, smoking and holding a bokken."></a>
+						<a href="#bunny"><img loading="lazy" id="#bunny-source" src="/assets/art/official/mini/bunny.webp" alt="Cheeky Diaz in a bunny outfit."></a>
+						<a href="#setsubun"><img loading="lazy" id="#setsubun-source" src="/assets/art/official/mini/setsubun.webp" alt="Diaz participating in setsubun, a traditional japanese ever where people eat and throw beans to ward off evil spirits. A few minions and her are throwing beans to each other, in a very pure, innocent and wholesome scene."></a>
+						<a href="#setup"><img loading="lazy" id="#setup-source" src="/assets/art/official/mini/setup.webp" alt="Diaz sits on her gaming chair eating chocolate while Tengu tries to set up the stream. On the bottom, Kappa can be seen tangled with PC cables, leisurely reading a book."></a>
+						
+						<a href="#shouu"><img loading="lazy" id="#shouu-source" src="/assets/art/official/mini/shouu.webp" alt="Diaz holding a minion, looking like she's about to start throwing a tantrum."></a>
+						<a href="#sleepy"><img loading="lazy" id="#sleepy-source" src="/assets/art/official/mini/sleepy.webp" alt="Diaz sleeping soundly, with her mouth open and drooling. She's hugging Kappa, who's also sleeping with a happy expression. Tengu is right next to them, awake and watching after them."></a>
+						<a href="#spaghetti"><img loading="lazy" id="#spaghetti-source" src="/assets/art/official/mini/spaghetti.webp" alt="Diaz eating spaghetti with tomato sauce and feta cheese, slightly blushing and looking at the viewer like 'don't look at me like that, I'm not gonna give you any'."></a>
+						<a href="#persona"><img loading="lazy" id="#persona-source" src="/assets/art/official/mini/persona.webp" alt="Diaz dressed up like a character from Persona 5, with a mask on her face. Her mother looms above her, like an ominous figure whose face we can't really tell apart."></a>
+						<a href="#vergia"><img loading="lazy" id="#vergia-source" src="/assets/art/official/mini/vergia.webp" alt="Diaz runs through the shallow waters of the beach, holding her white dress from getting wet. She's also wearing a white beach hat, while Kappa takes a picture of the scene from a small boat."></a>
+					</div>
+				</div>
+
+				<div class="hidden"> <!-- image details -->
+					<dl id="#chibi-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/Kukie_nyan">@Kukie_nyan</a> (Lily is Asleep)</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>Unknown</dd>
+					</dl>
+
+					<dl id="#chilling-minions-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/Kukie_nyan">@Kukie_nyan</a> (Lily is Asleep)</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>Unknown</dd>
+					</dl>
+
+					<dl id="#christmas-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/numanoan">@numanoan</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>25 December 2023</dd>
+					</dl>
+
+					<dl id="#cloud-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/ark_evil02">@ark_evil02</a> (ArkEvil)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>25 February 2022</dd>
+					</dl>
+
+					<dl id="#clover-senpai-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Featuring <a href="https://x.com/SenpaiClover/">Senpai Clover</a>, as part of a contest where Diaz would have a piece commissioned with one of the participants.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/cluseller">@cluseller</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>1 May 2023</dd>
+					</dl>
+
+					<dl id="#cooking-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/nang_z1">NANGZ1</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>30 December 2021</dd>
+					</dl>
+
+					<dl id="#cow-details">
+						<dt><strong>Information</strong></dt>
+						<dd>"so this is basically me riding my dad [...]"</dd>
+						<dd>"what's Kappa doing at my dad's ass? [...] why is he grabbing my dad's ass cheeks? I don't know, nobody knows"</dd>
+						<dd>— Diaz, 2023</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/emokakimasu">Nayatabe</a> (ニャタBE)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>Unknown</dd>
+					</dl>
+
+					<dl id="#crown-details">
+						<dt><strong>Information</strong></dt>
+						<dd>ArkEvil shared some <a href="https://x.com/ark_evil02/status/1712984555261747622">work-in-progress images on her twitter</a>.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/ark_evil02">@ark_evil02</a> (ArkEvil)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>14 October 2023</dd>
+					</dl>
+
+					<dl id="#dress-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/reinene_">@reinene_</a> (reine | レイネ)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>6 July 2022</dd>
+					</dl>
+
+					<dl id="#electro-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/yuyaiyaui">@yuyaiyaui</a> (ゆやぃやうい)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>2 February 2023</dd>
+					</dl>
+
+					<dl id="#explosion-punch-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/00x0044">@00x0044</a> (yu-ri)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>11 April 2022</dd>
+					</dl>
+
+					<dl id="#flower-crown-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/tlex022">@TLex022</a> (T-Lex)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>7 June 2022</dd>
+					</dl>
+
+					<dl id="#focused-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/klaius">@Klaius</a></dd>
+
+						<dt><strong>Release date</strong></dt>
+						<dd>24 March 2022</dd>
+					</dl>
+
+					<dl id="#gaming-chill-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/pppppupps">@pupps</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>9 May 2022</dd>
+					</dl>
+					
+					<dl id="#gaming-hard-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/goshichi_shoji">@goshichi_shoji</a> (五七翔二)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>19 July 2022</dd>
+					</dl>
+
+					<dl id="#gaming-shock-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/HB_091">@HB_091</a> (hardbears)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>25 August 2024</dd>
+					</dl>
+
+					<dl id="#gorilla-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/wolftapioca">@wolftapioca</a> (TAPI岡)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>20 December 2022</dd>
+					</dl>
+
+					<dl id="#goth-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/mashilemo">@mashilemo</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>15 June 2022</dd>
+					</dl>
+
+					<dl id="#hades-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://www.supergiantgames.com/games/hades/">Hades</a>.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/LunyDoobles">@LunyDoobles</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>10 February 2024</dd>
+					</dl>
+
+					<dl id="#helltaker-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://store.steampowered.com/app/1289310/Helltaker/">Helltaker</a>.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/bone_Nigi">@bone_Nigi</a> (骨二ギー)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>30 October 2024</dd>
+					</dl>
+
+					<dl id="#hollow-knight-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://www.hollowknight.com/">Hollow Knight</a>.</dd>
+						
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/hk__bb">@hk__bb</a> (BonBon)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>28 May 2023</dd>
+					</dl>
+
+					<dl id="#identity-v-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://idv.163.com/">Identity V</a>.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/horrormove">@horrormove</a> (Cotton Valant)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>13 February 2022</dd>
+					</dl>
+
+					<dl id="#zenitsu-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/Pb_nabi">@Pb_nabi</a> (Munape | むなぺ)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>18 March 2022</dd>
+					</dl>
+
+					<dl id="#jump-king-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://www.jump-king.com/">Jump King</a>.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/koroguchi">@koroguchi</a> (Krgc)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>1 December 2023</dd>
+					</dl>
+
+					<dl id="#kingdom-hearts-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://www.kingdomhearts.com">Kingdom Hearts</a>.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/IntotheFrisson">@IntotheFrisson</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>13 March 2024</dd>
+					</dl>
+					
+					<dl id="#little-witch-academia-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commisioned in relation to the series <a href="https://en.wikipedia.org/wiki/Little_Witch_Academia">Little Witch Academia</a>.</dd>
+						
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/_Marii_Pily">@_Marii_Pily</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>5 February 2023</dd>
+					</dl>
+					
+					<dl id="#lolita-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/yuyaiyaui">@yuyaiyaui</a> (ゆやぃやうい)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>25 May 2022</dd>
+					</dl>
+					
+					<dl id="#bored-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/ancoloyuki">@ancoloyuki</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>18 June 2023</dd>
+					</dl>
+					
+					<dl id="#lying-back-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/_keiuu">@_keiuu</a> (kei)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>10 May 2022</dd>
+					</dl>
+					
+					<dl id="#lying-clouds-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/demahmw">@demahmw</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>19 May 2022</dd>
+					</dl>
+					
+					<dl id="#model-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/Owozora">@Owozora</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>7 July 2021</dd>
+					</dl>
+					
+					<dl id="#persona-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://persona.atlus.com/p5r/">Persona 5 Royal</a>.</dd>
+						
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/IntotheFrisson">@IntotheFrisson</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>27 March 2024</dd>
+					</dl>
+					
+					<dl id="#psychonauts-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Art commissioned in relation to the game <a href="https://store.steampowered.com/app/3830/Psychonauts/">Psychonauts</a>.</dd>
+						
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/revujo">@revujo</a></dd>
+												
+						<dt><strong>Release date</strong></dt>
+						<dd>Unknown</dd>
+					</dl>
+					
+					<dl id="#reading-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/Hanh_R_A">@Hanh_R_A</a> (HanhChu)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>21 February 2022</dd>
+					</dl>
+					
+					<dl id="#roof-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/motsuba0312">@motsuba0312</a> (モツバ)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>6 December 2021</dd>
+					</dl>
+
+					<dl id="#sbeve-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/utyako">@utyako</a> (うちゃコ)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>19 December 2021</dd>
+					</dl>
+
+					<dl id="#scared-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/nemutamuu">@nemutamuu</a> (眠田むぅ。)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>1 June 2022</dd>
+					</dl>
+
+					<dl id="#school-smoking-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/hirokazutw">@hirokazutw</a> (HIROKAZU)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>18 June 2022</dd>
+					</dl>
+
+					<dl id="#school-v-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/hirokazutw">@hirokazutw</a> (HIROKAZU)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>18 June 2022</dd>
+					</dl>
+
+					<dl id="#setsubun-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://www.pixiv.net/en/users/46354041/illustrations">Jyagan7777</a></dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>15 March 2022</dd>
+					</dl>
+
+					<dl id="#setup-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/sakino_shingetu">@sakino_shingetu</a> (さきの新月)</dd>
+
+						<dt><strong>Release date</strong></dt>
+						<dd>13 February 2022</dd>
+					</dl>
+					
+					<dl id="#shouu-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/shouu_kyun">@shouu_kyun</a> (shouu)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>6 March 2022</dd>
+					</dl>
+
+					<dl id="#sleepy-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/PokeyPokums">@PokeyPokums</a> (Pokey)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>Unknown</dd>
+					</dl>
+
+					<dl id="#spaghetti-details">
+						<dt><strong>Information</strong></dt>
+						<dd>Diaz eating her favorite meal: spaghetti with tomato sauce and feta cheese.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/KiritzuguArt">@KiritzuguArt</a> (Kiritzugu)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>28 February 2022</dd>
+					</dl>
+
+					<dl id="#suikawari-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/utyako">@utyako</a> (うちゃコ)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>28 April 2022</dd>
+					</dl>
+
+					<dl id="#thunder-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/sue_kun">@sue_kun</a> (sue)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>4 January 2022</dd>
+					</dl>
+
+					<dl id="#tipsy-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/KiritzuguArt">@KiritzuguArt</a> (Kiritzugu)</dd>
+						
+						<dt><strong>Release date</strong></dt>
+						<dd>7 January 2022</dd>
+					</dl>
+
+					<dl id="#vergia-details">
+						<dt><strong>Information</strong></dt>
+						<dd>This piece is based on a real life location: Vergia beach in Greece.</dd>
+
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/potg333">@potg333</a></dd>
+
+						<dt><strong>Release date</strong></dt>
+						<dd>19 January 2022</dd>
+					</dl>
+
+					<dl id="#gaming-adorable-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/backbonecat">@backbonecat</a></dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>13 May 2022</dd>
+					</dl>
+
+					<dl id="#bunny-details">
+						<dt><strong>Artist</strong></dt>
+						<dd><a href="https://x.com/YoAdrianDK">@YoAdrianDK</a> (Just Adrian)</dd>
+		
+						<dt><strong>Release date</strong></dt>
+						<dd>31 August 2022</dd>
+					</dl>
+				</div>
+			</div>
+
+			<footer>
+				<a href="/about"><svg><use href="/assets/icons.svg#bolt"/></svg> about this website <svg><use href="/assets/icons.svg#bolt"/></svg></a>
+			</footer>
+		</div>
+	</body>
+</html>

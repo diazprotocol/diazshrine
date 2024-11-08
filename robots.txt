@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /*.html
+Disallow: /psyduck
+Disallow: /diaz/psyduck
+Allow: /assets/style.css
+Allow: /assets/code.js
+Allow: /assets/icons.svg
