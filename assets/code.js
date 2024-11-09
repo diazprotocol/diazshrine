@@ -655,21 +655,33 @@ function quizNextFadeIn() {
 	quizStage += 1
 }
 
+var allQuizQuestions = [];
+var quizQuestionsPickIndex = 0;
 var quizQuestions = [];
 function quizPrepareQuestions() {
-	const questions = document.getElementById("quiz-questions");
-	if (questions == null) {
-		console.error("Failed to load quiz questions.");
-		return;
+	if (allQuizQuestions.length == 0) {
+		const questions = document.getElementById("quiz-questions");
+		if (questions == null) {
+			console.error("Failed to load quiz questions.");
+			return;
+		}
+		for (var i = 0; i < questions.children.length; i++) {
+			const div = questions.children[i];
+			allQuizQuestions.push(div.id);
+		}
 	}
-	
+
 	quizQuestions = [];
-	for (var i = 0; i < questions.children.length; i++) {
-		const div = questions.children[i];
-		quizQuestions.push(div.id);
+	while (quizQuestions.length < 10) {
+		if (quizQuestionsPickIndex == 0) {
+			shuffle(allQuizQuestions);
+		}
+		const question = allQuizQuestions[quizQuestionsPickIndex];
+		quizQuestionsPickIndex = (quizQuestionsPickIndex + 1) % allQuizQuestions.length;
+		if (!quizQuestions.includes(question)) {
+			quizQuestions.push(question);
+		}
 	}
-	shuffle(quizQuestions);
-	quizQuestions = quizQuestions.slice(0, 10);
 }
 
 function quizSetupNext() {
