@@ -554,12 +554,12 @@ div.hidden a { transition: none; }
 
 /* quiz */
 
-div.quiz div {
+div.quiz div, div.big-button {
 	margin: 0 16.666%;
 	padding: 8px 0;
 }
 
-div.quiz div button {
+div.quiz div button, div.big-button button {
 	background: none;
 	border: none;
 	padding: 0 4px;
@@ -580,7 +580,7 @@ div.quiz div button {
 	box-shadow: 0 3px 0 var(--quiz-button-shadow);
 	transition-duration: 0.4s;
 }
-div.quiz div button:hover {
+div.quiz div button:hover, div.big-button button:hover {
 	background-color: var(--quiz-button-foreground-highlight);
 	transition-duration: 0.4s;
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Diaz Livestreams Yearly Map</title>
+		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
+		<script src="/assets/wasm_exec.js"></script>
+	</head>
+
+	<body>
+		<script>
+			if (!WebAssembly.instantiateStreaming) {
+				WebAssembly.instantiateStreaming = async (resp, importObject) => {
+					const source = await (await resp).arrayBuffer();
+					return await WebAssembly.instantiate(source, importObject);
+				};
+			}
+	
+			const go = new Go();
+			WebAssembly.instantiateStreaming(fetch("/viz/yearmap.wasm"), go.importObject).then(result => {
+				go.run(result.instance);
+			});
+		</script>
+	</body>
+</html>
+
