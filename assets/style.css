@@ -342,6 +342,20 @@ figcaption {
 	font-size: 15px;
 }
 
+/* footnotes */
+p.footnote {
+	font-size: 14px;
+}
+p.footnote:not(:last-of-type) {
+	margin-bottom: 4px;
+}
+p.footnote + p.footnote {
+	margin-top: 4px;
+}
+sup a {
+	font-weight: normal;
+}
+
 /* title tips */
 span.with-title-tip {
 	text-decoration-line: underline;
