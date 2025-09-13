@@ -7,7 +7,7 @@
 		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
 		<link href="/assets/style.css" rel="stylesheet">
 		<script src="/assets/code.js"></script>
-		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+		<link rel="preload" as="image" href="/assets/icons.svg">
 	</head>
 
 	<body>
@@ -17,14 +17,14 @@
 					<div class="header">
 						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
 						<h1><a href="/diaz/">Streamed games</a></h1>
-						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></button>
 					</div>
 	
 					<div class="block">
 						<h2>Game lists</h2>
 						<p>Here's a classification of the games that Diaz has played on stream. We have lists for <a href="#active">active</a>, <a href="#inactive">inactive</a>, <a href="#completed">completed</a>, <a href="#played">played</a> and <a href="#dropped">dropped</a> games.</p>
 						<div class="quote">
-							<p>Last updated: 7 September 2025</p>
+							<p>Last updated: 13 September 2025</p>
 						</div>
 						<!-- <p><span class="subtler">(having a simple tracking doc and dynamic data viz (like a vertical gantt/timeline chart) to display selected records would be awesome. kinda painful to create, but maybe actually easier to maintain in some regards)</span></p> -->
 						<!-- e.g. sliders for play frequency (jump king probably being lowest in terms of sessions/stream within the period), same for natural days, search time range, min/max time range since played, num sessions range, complete/incomplete, etc. -->

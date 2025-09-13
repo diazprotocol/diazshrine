@@ -7,7 +7,7 @@
 		<link rel="icon" type="image/png" href="/assets/img/ico32x32.png">
 		<link href="/assets/style.css" rel="stylesheet">
 		<script src="/assets/code.js"></script>
-		<object type="image/svg+xml" data="/assets/icons.svg" class="hidden"></object>
+		<link rel="preload" as="image" href="/assets/icons.svg">
 	</head>
 
 	<body>
@@ -17,7 +17,7 @@
 					<div class="header">
 						<button class="svg" name="menu" title="Website navigation menu" onclick="gotoMenu();"><svg><use href="/assets/icons.svg#menu"/></svg></button>
 						<h1><a href="/diaz/">Diaz streams</a></h1>
-						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></a>
+						<button class="svg" name="change theme" title="Change theme. Click + Alt to reset." onclick="toggleTheme(event);"><svg><use href="/assets/icons.svg#palette"/></svg></button>
 					</div>
 	
 					<div class="block">
